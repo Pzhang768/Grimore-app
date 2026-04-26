@@ -10,6 +10,10 @@ out
 .env.local
 .env*.local
 
+# playwright
+playwright-report
+test-results
+
 # misc
 .DS_Store
 *.pem
