@@ -62,13 +62,13 @@ palette: {
 
 Agent states must always use these specific colours for consistency:
 
-| Status | Colour | Token |
-|---|---|---|
-| Idle | `#9490B8` | `text.secondary` |
-| Running | `#4B5563` | `primary.main` |
-| Complete | `#00D4AA` | `secondary.main` |
-| Error | `#FF4757` | `error.main` |
-| Waiting (checkpoint) | `#FFB020` | `warning.main` |
+| Status               | Colour    | Token            |
+| -------------------- | --------- | ---------------- |
+| Idle                 | `#9490B8` | `text.secondary` |
+| Running              | `#4B5563` | `primary.main`   |
+| Complete             | `#00D4AA` | `secondary.main` |
+| Error                | `#FF4757` | `error.main`     |
+| Waiting (checkpoint) | `#FFB020` | `warning.main`   |
 
 ### Colour Rules
 
@@ -84,10 +84,10 @@ Agent states must always use these specific colours for consistency:
 
 MUI typography is configured with two fonts:
 
-| Font | Usage |
-|---|---|
-| **Inter** | All functional UI — labels, body, buttons, inputs |
-| **Space Grotesk** | Display headings on marketing/landing pages only |
+| Font              | Usage                                             |
+| ----------------- | ------------------------------------------------- |
+| **Inter**         | All functional UI — labels, body, buttons, inputs |
+| **Space Grotesk** | Display headings on marketing/landing pages only  |
 
 ```ts
 typography: {
@@ -121,12 +121,12 @@ sx={{ p: 2, gap: 1.5, mt: 3 }}
 sx={{ padding: '13px', marginTop: '20px' }}
 ```
 
-| Context | Value |
-|---|---|
-| Page sections | `p: 4` / `p: 6` |
-| Cards / panels | `p: 3` |
-| Form groups | `gap: 2` |
-| Inline elements | `gap: 1` |
+| Context                  | Value                         |
+| ------------------------ | ----------------------------- |
+| Page sections            | `p: 4` / `p: 6`               |
+| Cards / panels           | `p: 3`                        |
+| Form groups              | `gap: 2`                      |
+| Inline elements          | `gap: 1`                      |
 | Button padding (default) | MUI default — do not override |
 
 ---
@@ -135,11 +135,11 @@ sx={{ padding: '13px', marginTop: '20px' }}
 
 Three tiers only:
 
-| Tier | Value | Usage |
-|---|---|---|
-| Small | `8px` | Inputs, chips, badges, code blocks |
-| Medium | `12px` | Cards, panels, dialogs |
-| Large | `16px` | Agent cards, team builder tiles |
+| Tier   | Value  | Usage                              |
+| ------ | ------ | ---------------------------------- |
+| Small  | `8px`  | Inputs, chips, badges, code blocks |
+| Medium | `12px` | Cards, panels, dialogs             |
+| Large  | `16px` | Agent cards, team builder tiles    |
 
 ```ts
 shape: {
@@ -153,13 +153,13 @@ For medium and large, apply via `sx={{ borderRadius: '12px' }}` or define as com
 
 ## Shadows & Elevation
 
-| Level | Usage |
-|---|---|
-| `elevation={0}` | Flat — inline content, table rows |
-| `elevation={1}` | Cards, panels |
-| `elevation={4}` | Dropdowns, popovers |
-| `elevation={8}` | Dialogs, modals |
-| `elevation={16}` | Critical overlays |
+| Level            | Usage                             |
+| ---------------- | --------------------------------- |
+| `elevation={0}`  | Flat — inline content, table rows |
+| `elevation={1}`  | Cards, panels                     |
+| `elevation={4}`  | Dropdowns, popovers               |
+| `elevation={8}`  | Dialogs, modals                   |
+| `elevation={16}` | Critical overlays                 |
 
 Every floating element (menu, popover, dialog) must have an elevation. Flat cards are fine for content areas.
 
@@ -215,12 +215,12 @@ Every floating element (menu, popover, dialog) must have an elevation. Flat card
 
 MUI breakpoints:
 
-| Breakpoint | Width | Usage |
-|---|---|---|
-| `xs` | 0px+ | Mobile (base styles) |
-| `sm` | 600px+ | Minor adjustments |
-| `md` | 900px+ | Tablet — primary breakpoint |
-| `lg` | 1200px+ | Desktop |
+| Breakpoint | Width   | Usage                       |
+| ---------- | ------- | --------------------------- |
+| `xs`       | 0px+    | Mobile (base styles)        |
+| `sm`       | 600px+  | Minor adjustments           |
+| `md`       | 900px+  | Tablet — primary breakpoint |
+| `lg`       | 1200px+ | Desktop                     |
 
 - Primary breakpoint is `md` — most layout changes happen here
 - Use `useMediaQuery(theme.breakpoints.down('md'))` for programmatic responsive logic

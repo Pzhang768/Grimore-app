@@ -10,14 +10,7 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     coverage: {
       reporter: ['text', 'lcov'],
-      exclude: [
-        'node_modules',
-        '.next',
-        'src/test',
-        '**/*.config.*',
-        '**/index.ts',
-        'src/types',
-      ],
+      exclude: ['node_modules', '.next', 'src/test', '**/*.config.*', '**/index.ts', 'src/types'],
     },
   },
   resolve: {

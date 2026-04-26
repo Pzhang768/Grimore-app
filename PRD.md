@@ -41,6 +41,7 @@ Claude Haiku 4.5 for all agents at MVP. Provider is abstracted so models can be 
 ## 6. MVP Scope
 
 ### In
+
 - Account creation and login
 - Dashboard: create a team, pick agents, set context per agent
 - Pre-built job search agents (see Section 7)
@@ -50,6 +51,7 @@ Claude Haiku 4.5 for all agents at MVP. Provider is abstracted so models can be 
 - Subscription billing (Stripe)
 
 ### Out
+
 - Auto-applying to jobs
 - Custom agent creation
 - Scheduled runs
@@ -60,12 +62,12 @@ Claude Haiku 4.5 for all agents at MVP. Provider is abstracted so models can be 
 
 ## 7. Job Search Agents
 
-| Agent | Job | Input | Output |
-|---|---|---|---|
-| **Job Listing Fetcher** | Finds relevant roles | Role title, location, level, keywords | List of job postings |
-| **Fit Analyser** | Scores each listing against the user's profile | Listings + resume | Ranked shortlist with reasoning |
-| **Resume Tailoring Agent** | Rewrites resume to match each role | Resume + job description | Tailored resume per role |
-| **Coordinator** | Passes context between agents, signals completion | All outputs | Shared context, done signal |
+| Agent                      | Job                                               | Input                                 | Output                          |
+| -------------------------- | ------------------------------------------------- | ------------------------------------- | ------------------------------- |
+| **Job Listing Fetcher**    | Finds relevant roles                              | Role title, location, level, keywords | List of job postings            |
+| **Fit Analyser**           | Scores each listing against the user's profile    | Listings + resume                     | Ranked shortlist with reasoning |
+| **Resume Tailoring Agent** | Rewrites resume to match each role                | Resume + job description              | Tailored resume per role        |
+| **Coordinator**            | Passes context between agents, signals completion | All outputs                           | Shared context, done signal     |
 
 ---
 
@@ -100,6 +102,7 @@ In v2: tailor each shortlisted job in parallel, and add an evaluator agent that 
 ## 11. Tech Stack
 
 ### Frontend
+
 - **Next.js** — App Router
 - **MUI** — components
 - **Redux Toolkit** — client state
@@ -110,25 +113,32 @@ In v2: tailor each shortlisted job in parallel, and add an evaluator agent that 
 - **Husky, ESLint, Prettier** — code quality
 
 ### Backend
+
 - **Go + Gin** — API server and agent orchestration
 
 ### AI
+
 - **Claude Haiku 4.5** — all agents at MVP
 - **Abstracted provider interface** — swap models per agent in v2
 
 ### Database
+
 - **PostgreSQL** — local for dev
 - **GORM** — ORM
 
 ### Auth
+
 - **Supabase Auth** — login, email verification, password recovery, OAuth
 
 ### File Storage
+
 - **Supabase Storage** — resume uploads
 
 ### Payments
+
 - **Stripe** — subscriptions
 
 ### Deployment
+
 - **Vercel** — frontend
 - **Railway** — Go backend + Postgres

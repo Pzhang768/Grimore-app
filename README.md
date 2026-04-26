@@ -18,11 +18,11 @@ Runs at `http://localhost:3000`. Requires [Grimore-api](https://github.com/Pzhan
 
 ## Environment Variables
 
-| Variable | Description |
-|---|---|
-| `NEXT_PUBLIC_API_BASE_URL` | Go backend URL (`http://localhost:8080`) |
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
+| Variable                        | Description                              |
+| ------------------------------- | ---------------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL`      | Go backend URL (`http://localhost:8080`) |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL                     |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key                        |
 
 ## Commands
 
