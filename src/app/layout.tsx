@@ -5,7 +5,7 @@ import Providers from '@/components/Providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Grimore',
+  title: 'Grimoire',
   description: 'AI agent workflow dashboard',
 }
 
