@@ -8,11 +8,19 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
-    exclude: ['node_modules', '.next', 'e2e/**'],
+    exclude: ['node_modules', '.next/**', 'e2e/**'],
     passWithNoTests: true,
     coverage: {
       reporter: ['text', 'lcov'],
-      exclude: ['node_modules', '.next', 'src/test', '**/*.config.*', '**/index.ts', 'src/types'],
+      thresholds: { lines: 100, functions: 100, branches: 100, statements: 100 },
+      exclude: [
+        'node_modules',
+        '.next/**',
+        'src/test',
+        '**/*.config.*',
+        '**/index.ts',
+        'src/types',
+      ],
     },
   },
   resolve: {
