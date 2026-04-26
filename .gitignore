@@ -1,0 +1,27 @@
+# deps
+node_modules
+
+# next
+.next
+out
+
+# env
+.env
+.env.local
+.env*.local
+
+# playwright
+playwright-report
+test-results
+
+# coverage
+coverage
+
+# typescript
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
