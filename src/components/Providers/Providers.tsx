@@ -11,13 +11,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient())
 
   return (
-    <ReduxProvider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
-      </QueryClientProvider>
-    </ReduxProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ReduxProvider store={store}>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      </ReduxProvider>
+    </ThemeProvider>
   )
 }
