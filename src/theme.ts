@@ -1,5 +1,13 @@
 import { createTheme } from '@mui/material/styles'
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    cta: true
+    ghost: true
+    navGhost: true
+  }
+}
+
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -46,6 +54,65 @@ const theme = createTheme({
   },
   shape: {
     borderRadius: 8,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        text: {
+          color: '#F0EEFF',
+          fontSize: 14,
+          fontWeight: 600,
+        },
+      },
+      variants: [
+        {
+          props: { variant: 'cta' },
+          style: {
+            backgroundColor: '#00D4AA',
+            color: '#001612',
+            fontWeight: 600,
+            fontSize: 15,
+            padding: '12px 22px',
+            borderRadius: '10px',
+            boxShadow: '0 0 24px -4px rgba(0,212,170,0.53)',
+            '&:hover': {
+              backgroundColor: '#00BF99',
+              boxShadow: '0 0 32px -4px rgba(0,212,170,0.7)',
+            },
+          },
+        },
+        {
+          props: { variant: 'ghost' },
+          style: {
+            backgroundColor: 'transparent',
+            color: '#F0EEFF',
+            fontWeight: 600,
+            fontSize: 15,
+            padding: '12px 18px',
+            borderRadius: '10px',
+            border: '1px solid #2D2852',
+            '&:hover': {
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              borderColor: '#4A4470',
+            },
+          },
+        },
+        {
+          props: { variant: 'navGhost' },
+          style: {
+            backgroundColor: '#1A1635',
+            color: '#F0EEFF',
+            fontWeight: 600,
+            fontSize: 14,
+            border: '1px solid #2D2852',
+            '&:hover': {
+              backgroundColor: '#221D42',
+              borderColor: '#4A4470',
+            },
+          },
+        },
+      ],
+    },
   },
 })
 
