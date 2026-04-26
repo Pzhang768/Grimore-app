@@ -17,6 +17,10 @@ test-results
 # coverage
 coverage
 
+# typescript
+tsconfig.tsbuildinfo
+next-env.d.ts
+
 # misc
 .DS_Store
 *.pem
