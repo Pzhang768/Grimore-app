@@ -52,7 +52,7 @@ function TeamGraph() {
       role: 'orchestrates',
       x: cx,
       y: cy,
-      r: 50,
+      r: 60,
       status: 'running',
     },
     {
@@ -61,7 +61,7 @@ function TeamGraph() {
       role: 'finds listings',
       x: cx - 180,
       y: cy - 110,
-      r: 38,
+      r: 46,
       status: 'complete',
     },
     {
@@ -70,7 +70,7 @@ function TeamGraph() {
       role: 'scores fit',
       x: cx + 180,
       y: cy - 110,
-      r: 38,
+      r: 46,
       status: 'complete',
     },
     {
@@ -79,7 +79,7 @@ function TeamGraph() {
       role: 'rewrites resume',
       x: cx,
       y: cy + 170,
-      r: 38,
+      r: 46,
       status: 'running',
     },
   ]
@@ -190,10 +190,10 @@ function TeamGraph() {
               />
               <text
                 x={n.x}
-                y={n.y - 4}
+                y={n.y - 5}
                 textAnchor="middle"
                 fontFamily="Inter, sans-serif"
-                fontSize="13"
+                fontSize="15"
                 fontWeight="600"
                 fill={palette.text.primary}
               >
@@ -201,10 +201,10 @@ function TeamGraph() {
               </text>
               <text
                 x={n.x}
-                y={n.y + 12}
+                y={n.y + 14}
                 textAnchor="middle"
                 fontFamily="Inter, sans-serif"
-                fontSize="10"
+                fontSize="12"
                 fill={palette.text.secondary}
               >
                 {n.role}
