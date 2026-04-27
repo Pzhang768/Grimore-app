@@ -58,7 +58,13 @@ export default function LoginForm() {
 
   return (
     <Box
-      sx={{ width: '100%', minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr' }}
+      sx={{
+        width: '100%',
+        minHeight: '100vh',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        position: 'relative',
+      }}
     >
       {/* Ambient glow top-left */}
       <Box

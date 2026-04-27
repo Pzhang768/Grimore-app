@@ -20,6 +20,7 @@ export default function VisualSide() {
           position: 'absolute',
           inset: 0,
           overflow: 'hidden',
+          /* deepens slightly toward bottom; intentionally darker than background.default */
           background: `linear-gradient(180deg, ${palette.background.default} 0%, #0A0816 100%)`,
           display: 'flex',
           flexDirection: 'column',

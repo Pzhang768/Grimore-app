@@ -1,10 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { vi, describe, it, expect } from 'vitest'
-import type React from 'react'
 import VisualSide from './VisualSide'
 
-vi.mock('@/components/GrimChip', () => ({
-  default: ({ children }: { children: React.ReactNode }) => <span>{children}</span>,
+vi.mock('../TeamGraph', () => ({
+  default: () => <div data-testid="team-graph" />,
 }))
 
 describe('VisualSide', () => {
@@ -20,6 +19,6 @@ describe('VisualSide', () => {
 
   it('renders the team graph', () => {
     render(<VisualSide />)
-    expect(screen.getByText('team · job-search')).toBeInTheDocument()
+    expect(screen.getByTestId('team-graph')).toBeInTheDocument()
   })
 })

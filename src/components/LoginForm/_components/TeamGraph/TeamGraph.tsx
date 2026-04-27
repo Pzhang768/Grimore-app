@@ -1,6 +1,7 @@
 'use client'
 
-import { Box, Typography, useTheme } from '@mui/material'
+import { useId } from 'react'
+import { Box, GlobalStyles, Typography, useTheme } from '@mui/material'
 import GrimChip from '@/components/GrimChip'
 
 type NodeStatus = 'complete' | 'running' | 'waiting' | 'idle'
@@ -59,6 +60,8 @@ const nodes: {
 
 export default function TeamGraph() {
   const { palette } = useTheme()
+  const uid = useId()
+  const gradientId = `${uid}-coordGlow`
 
   const colorMap: Record<NodeStatus, string> = {
     complete: palette.secondary.main,
@@ -80,6 +83,18 @@ export default function TeamGraph() {
         width: '100%',
       }}
     >
+      <GlobalStyles
+        styles={{
+          '@keyframes grimOrbit': {
+            '0%': { strokeDashoffset: 0 },
+            '100%': { strokeDashoffset: -20 },
+          },
+          '@keyframes grimNodePulse': {
+            '0%, 100%': { opacity: 1 },
+            '50%': { opacity: 0.5 },
+          },
+        }}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -112,7 +127,7 @@ export default function TeamGraph() {
 
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: 'block' }}>
         <defs>
-          <radialGradient id="loginCoordGlow" cx="50%" cy="50%" r="50%">
+          <radialGradient id={gradientId} cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor={palette.secondary.main} stopOpacity="0.35" />
             <stop offset="100%" stopColor={palette.secondary.main} stopOpacity="0" />
           </radialGradient>
@@ -132,7 +147,7 @@ export default function TeamGraph() {
           />
         ))}
 
-        <circle cx={cx} cy={cy} r="120" fill="url(#loginCoordGlow)" />
+        <circle cx={cx} cy={cy} r="120" fill={`url(#${gradientId})`} />
 
         {nodes.map((n) => {
           const c = nodeColor(n.status)

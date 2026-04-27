@@ -1,7 +1,6 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi, describe, it, expect, beforeEach } from 'vitest'
-import type React from 'react'
 import LoginForm from './LoginForm'
 
 const mockPush = vi.hoisted(() => vi.fn())
@@ -19,8 +18,8 @@ vi.mock('@/lib/supabase', () => ({
   },
 }))
 
-vi.mock('@/components/GrimChip', () => ({
-  default: ({ children }: { children: React.ReactNode }) => <span>{children}</span>,
+vi.mock('./_components/VisualSide', () => ({
+  default: () => <div data-testid="visual-side" />,
 }))
 
 function renderForm() {
@@ -78,7 +77,7 @@ describe('LoginForm', () => {
 
   it('renders the visual side', () => {
     renderForm()
-    expect(screen.getByText('Your agents are already working.')).toBeInTheDocument()
+    expect(screen.getByTestId('visual-side')).toBeInTheDocument()
   })
 
   it('toggles password visibility', async () => {

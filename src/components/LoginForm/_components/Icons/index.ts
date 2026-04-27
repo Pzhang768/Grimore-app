@@ -1,1 +1,2 @@
-export { EyeIcon, EyeOffIcon, GoogleGlyph, GitHubGlyph } from './Icons'
+export { EyeIcon, EyeOffIcon, GoogleGlyph } from './Icons'
+export { GitHubGlyph } from './GitHubGlyph'
