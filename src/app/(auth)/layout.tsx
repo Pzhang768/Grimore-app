@@ -8,11 +8,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <Box
       sx={{
         minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         bgcolor: 'background.default',
-        p: 2,
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
       {children}
