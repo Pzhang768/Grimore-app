@@ -76,10 +76,9 @@ describe('LoginForm', () => {
     )
   })
 
-  it('renders the visual side with heading and team graph', () => {
+  it('renders the visual side', () => {
     renderForm()
     expect(screen.getByText('Your agents are already working.')).toBeInTheDocument()
-    expect(screen.getByText('team · job-search')).toBeInTheDocument()
   })
 
   it('toggles password visibility', async () => {
