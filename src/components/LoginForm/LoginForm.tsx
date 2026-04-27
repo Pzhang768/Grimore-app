@@ -101,93 +101,104 @@ function GitHubGlyph() {
 function VisualSide() {
   const { palette } = useTheme()
   return (
+    /* Outer: stretches to grid row height, never grows beyond it */
     <Box
       sx={{
         position: 'relative',
         overflow: 'hidden',
         borderLeft: '1px solid',
         borderColor: 'divider',
-        background: `linear-gradient(180deg, ${palette.background.default} 0%, #0A0816 100%)`,
-        display: 'flex',
-        flexDirection: 'column',
-        p: '48px 56px',
+        alignSelf: 'stretch',
       }}
     >
-      {/* Ambient mint glow */}
+      {/* Inner: fills the outer, never adds to it */}
       <Box
         sx={{
           position: 'absolute',
-          right: -150,
-          top: '35%',
-          width: 700,
-          height: 700,
-          borderRadius: '50%',
-          background: `radial-gradient(closest-side, ${palette.secondary.main}1f, transparent 70%)`,
-          pointerEvents: 'none',
-        }}
-      />
-
-      <Box
-        sx={{
-          position: 'relative',
-          zIndex: 1,
+          inset: 0,
+          overflow: 'hidden',
+          background: `linear-gradient(180deg, ${palette.background.default} 0%, #0A0816 100%)`,
           display: 'flex',
           flexDirection: 'column',
-          height: '100%',
+          p: '48px 56px',
         }}
       >
-        {/* Pitch copy */}
-        <Box sx={{ maxWidth: 440 }}>
-          <Box
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 1,
-              mb: 2,
-              fontSize: 11,
-              color: 'secondary.main',
-              fontFamily: 'ui-monospace, monospace',
-              letterSpacing: '0.12em',
-            }}
-          >
-            <Box
-              component="span"
-              sx={{
-                width: 5,
-                height: 5,
-                borderRadius: '50%',
-                bgcolor: 'secondary.main',
-                flexShrink: 0,
-              }}
-            />
-            WHAT YOUR TEAM WILL DO
-          </Box>
-          <Typography
-            variant="h2"
-            sx={{ fontSize: 36, lineHeight: 1.1, letterSpacing: '-0.02em', mb: 0 }}
-          >
-            Four agents,
-            <br />
-            one shortlist,
-            <br />
-            <Box component="span" sx={{ color: 'secondary.main' }}>
-              tailored resumes
-            </Box>
-            .
-          </Typography>
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ mt: 2, maxWidth: 380, lineHeight: 1.55 }}
-          >
-            Fetch listings, score fit, rewrite the resume. Grimoire handles the loop — you approve
-            the output.
-          </Typography>
-        </Box>
+        {/* Ambient mint glow */}
+        <Box
+          sx={{
+            position: 'absolute',
+            right: -150,
+            top: '35%',
+            width: 700,
+            height: 700,
+            borderRadius: '50%',
+            background: `radial-gradient(closest-side, ${palette.secondary.main}1f, transparent 70%)`,
+            pointerEvents: 'none',
+          }}
+        />
 
-        {/* Log panel anchored to bottom */}
-        <Box sx={{ mt: 'auto' }}>
-          <AgentLogPanel compact title="preview · sample run" />
+        <Box
+          sx={{
+            position: 'relative',
+            zIndex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+          }}
+        >
+          {/* Pitch copy */}
+          <Box sx={{ maxWidth: 440 }}>
+            <Box
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+                mb: 2,
+                fontSize: 11,
+                color: 'secondary.main',
+                fontFamily: 'ui-monospace, monospace',
+                letterSpacing: '0.12em',
+              }}
+            >
+              <Box
+                component="span"
+                sx={{
+                  width: 5,
+                  height: 5,
+                  borderRadius: '50%',
+                  bgcolor: 'secondary.main',
+                  flexShrink: 0,
+                }}
+              />
+              WHAT YOUR TEAM WILL DO
+            </Box>
+            <Typography
+              variant="h2"
+              sx={{ fontSize: 36, lineHeight: 1.1, letterSpacing: '-0.02em', mb: 0 }}
+            >
+              Four agents,
+              <br />
+              one shortlist,
+              <br />
+              <Box component="span" sx={{ color: 'secondary.main' }}>
+                tailored resumes
+              </Box>
+              .
+            </Typography>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ mt: 2, maxWidth: 380, lineHeight: 1.55 }}
+            >
+              Fetch listings, score fit, rewrite the resume. Grimoire handles the loop — you approve
+              the output.
+            </Typography>
+          </Box>
+
+          {/* Log panel anchored to bottom */}
+          <Box sx={{ mt: 'auto' }}>
+            <AgentLogPanel compact title="preview · sample run" />
+          </Box>
         </Box>
       </Box>
     </Box>
@@ -221,7 +232,9 @@ export default function LoginForm() {
   }
 
   return (
-    <Box sx={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+    <Box
+      sx={{ width: '100%', minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr' }}
+    >
       {/* Ambient glow top-left */}
       <Box
         sx={{
