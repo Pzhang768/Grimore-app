@@ -6,7 +6,6 @@ import LoginForm from './LoginForm'
 
 const mockPush = vi.hoisted(() => vi.fn())
 const mockSignIn = vi.hoisted(() => vi.fn())
-const mockSignInWithOAuth = vi.hoisted(() => vi.fn())
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: mockPush }),
@@ -16,7 +15,6 @@ vi.mock('@/lib/supabase', () => ({
   supabase: {
     auth: {
       signInWithPassword: mockSignIn,
-      signInWithOAuth: mockSignInWithOAuth,
     },
   },
 }))
@@ -45,16 +43,6 @@ describe('LoginForm', () => {
     renderForm()
     expect(screen.getByRole('button', { name: /continue with google/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /continue with github/i })).toBeInTheDocument()
-  })
-
-  it('calls signInWithOAuth with google provider on Google button click', async () => {
-    mockSignInWithOAuth.mockResolvedValue({})
-    renderForm()
-    await userEvent.click(screen.getByRole('button', { name: /continue with google/i }))
-    expect(mockSignInWithOAuth).toHaveBeenCalledWith({
-      provider: 'google',
-      options: { redirectTo: expect.stringContaining('/auth/callback') },
-    })
   })
 
   it('renders email and password fields', () => {

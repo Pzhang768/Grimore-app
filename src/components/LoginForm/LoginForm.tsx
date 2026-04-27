@@ -43,13 +43,6 @@ export default function LoginForm() {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({ resolver: zodResolver(schema) })
 
-  async function signInWithGoogle() {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
-    })
-  }
-
   async function onSubmit(values: FormValues) {
     setServerError(null)
     const { error } = await supabase.auth.signInWithPassword({
@@ -142,7 +135,6 @@ export default function LoginForm() {
                 variant="ghost"
                 startIcon={<GoogleGlyph />}
                 fullWidth
-                onClick={signInWithGoogle}
                 sx={{ justifyContent: 'center', fontSize: 14 }}
               >
                 Continue with Google
