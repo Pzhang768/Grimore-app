@@ -1,16 +1,8 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 
-const appSlice = createSlice({
-  name: 'app',
-  initialState: {},
-  reducers: {},
-})
-
 export const store = configureStore({
-  reducer: {
-    app: appSlice.reducer,
-  },
+  reducer: {},
 })
 
 export type RootState = ReturnType<typeof store.getState>
