@@ -1,6 +1,7 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi, describe, it, expect, beforeEach } from 'vitest'
+import type React from 'react'
 import LoginForm from './LoginForm'
 
 const mockPush = vi.hoisted(() => vi.fn())
@@ -18,8 +19,8 @@ vi.mock('@/lib/supabase', () => ({
   },
 }))
 
-vi.mock('@/components/AgentLogPanel', () => ({
-  default: () => <div data-testid="agent-log-panel" />,
+vi.mock('@/components/GrimChip', () => ({
+  default: ({ children }: { children: React.ReactNode }) => <span>{children}</span>,
 }))
 
 function renderForm() {
@@ -75,9 +76,9 @@ describe('LoginForm', () => {
     )
   })
 
-  it('renders the visual side with agent log panel', () => {
+  it('renders the visual side with team graph', () => {
     renderForm()
-    expect(screen.getByTestId('agent-log-panel')).toBeInTheDocument()
+    expect(screen.getByText('team · job-search')).toBeInTheDocument()
   })
 
   it('toggles password visibility', async () => {

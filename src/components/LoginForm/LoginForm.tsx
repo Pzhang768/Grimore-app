@@ -20,11 +20,11 @@ import {
 } from '@mui/material'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import AgentLogPanel from '@/components/AgentLogPanel'
+import GrimChip from '@/components/GrimChip'
 import ConstellationMark from '@/components/TopNav/_components/ConstellationMark'
 
 const schema = z.object({
-  email: z.string().min(1, 'Email is required').email('Enter a valid email'),
+  email: z.string().min(1, 'Email is required').email({ message: 'Enter a valid email' }),
   password: z.string().min(1, 'Password is required'),
 })
 
@@ -98,6 +98,210 @@ function GitHubGlyph() {
   )
 }
 
+function TeamGraph() {
+  const { palette } = useTheme()
+  const W = 560,
+    H = 480
+  const cx = W / 2,
+    cy = H / 2
+  type NodeStatus = 'complete' | 'running' | 'waiting' | 'idle'
+  const nodes: {
+    id: string
+    label: string
+    role: string
+    x: number
+    y: number
+    r: number
+    status: NodeStatus
+  }[] = [
+    {
+      id: 'coord',
+      label: 'Coordinator',
+      role: 'orchestrates',
+      x: cx,
+      y: cy,
+      r: 50,
+      status: 'running',
+    },
+    {
+      id: 'fetch',
+      label: 'Fetcher',
+      role: 'finds listings',
+      x: cx - 180,
+      y: cy - 110,
+      r: 38,
+      status: 'complete',
+    },
+    {
+      id: 'fit',
+      label: 'Analyser',
+      role: 'scores fit',
+      x: cx + 180,
+      y: cy - 110,
+      r: 38,
+      status: 'complete',
+    },
+    {
+      id: 'tail',
+      label: 'Tailor',
+      role: 'rewrites resume',
+      x: cx,
+      y: cy + 170,
+      r: 38,
+      status: 'running',
+    },
+  ]
+  const NODE_COLORS: Record<'complete' | 'running' | 'waiting' | 'idle', string> = {
+    complete: palette.secondary.main,
+    running: palette.primary.light,
+    waiting: palette.warning.main,
+    idle: palette.text.secondary,
+  }
+  const nodeColor = (status: 'complete' | 'running' | 'waiting' | 'idle'): string =>
+    NODE_COLORS[status]
+
+  return (
+    <Box
+      sx={{
+        bgcolor: 'background.paper',
+        border: '1px solid',
+        borderColor: 'divider',
+        borderRadius: 3,
+        p: 2,
+        boxShadow: '0 30px 80px -20px rgba(0,0,0,0.55)',
+        width: '100%',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          px: 1.25,
+          pb: 1.75,
+        }}
+      >
+        <Typography
+          variant="caption"
+          sx={{ color: 'text.secondary', fontFamily: 'ui-monospace, monospace' }}
+        >
+          team · job-search
+        </Typography>
+        <GrimChip color="secondary">
+          <Box
+            component="span"
+            sx={{
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              bgcolor: 'secondary.main',
+              flexShrink: 0,
+            }}
+          />
+          Running
+        </GrimChip>
+      </Box>
+
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: 'block' }}>
+        <defs>
+          <radialGradient id="loginCoordGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={palette.secondary.main} stopOpacity="0.35" />
+            <stop offset="100%" stopColor={palette.secondary.main} stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* edges */}
+        {nodes.slice(1).map((n) => (
+          <line
+            key={n.id}
+            x1={cx}
+            y1={cy}
+            x2={n.x}
+            y2={n.y}
+            stroke={palette.divider}
+            strokeWidth="1.5"
+            strokeDasharray="4 4"
+            style={{ animation: 'grimOrbit 3s linear infinite' }}
+          />
+        ))}
+
+        {/* centre glow */}
+        <circle cx={cx} cy={cy} r="120" fill="url(#loginCoordGlow)" />
+
+        {/* nodes */}
+        {nodes.map((n) => {
+          const c = nodeColor(n.status)
+          return (
+            <g
+              key={n.id}
+              style={{
+                animation:
+                  n.status === 'running' ? 'grimNodePulse 2.2s ease-in-out infinite' : 'none',
+              }}
+            >
+              <circle
+                cx={n.x}
+                cy={n.y}
+                r={n.r}
+                fill={palette.background.default}
+                stroke={c}
+                strokeWidth="1.5"
+              />
+              <circle
+                cx={n.x}
+                cy={n.y}
+                r={n.r + 6}
+                fill="none"
+                stroke={c}
+                strokeWidth="1"
+                opacity="0.25"
+              />
+              <text
+                x={n.x}
+                y={n.y - 4}
+                textAnchor="middle"
+                fontFamily="Inter, sans-serif"
+                fontSize="13"
+                fontWeight="600"
+                fill={palette.text.primary}
+              >
+                {n.label}
+              </text>
+              <text
+                x={n.x}
+                y={n.y + 12}
+                textAnchor="middle"
+                fontFamily="Inter, sans-serif"
+                fontSize="10"
+                fill={palette.text.secondary}
+              >
+                {n.role}
+              </text>
+            </g>
+          )
+        })}
+
+        {/* travelling packets */}
+        {nodes.slice(1).map((n, i) => (
+          <circle key={'p' + n.id} r="3" fill={nodeColor(n.status)}>
+            <animateMotion
+              dur={`${2 + i * 0.4}s`}
+              repeatCount="indefinite"
+              path={`M${cx},${cy} L${n.x},${n.y}`}
+            />
+            <animate
+              attributeName="opacity"
+              values="0;1;0"
+              dur={`${2 + i * 0.4}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        ))}
+      </svg>
+    </Box>
+  )
+}
+
 function VisualSide() {
   const { palette } = useTheme()
   return (
@@ -120,6 +324,8 @@ function VisualSide() {
           background: `linear-gradient(180deg, ${palette.background.default} 0%, #0A0816 100%)`,
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
           p: '48px 56px',
         }}
       >
@@ -136,69 +342,8 @@ function VisualSide() {
             pointerEvents: 'none',
           }}
         />
-
-        <Box
-          sx={{
-            position: 'relative',
-            zIndex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100%',
-          }}
-        >
-          {/* Pitch copy */}
-          <Box sx={{ maxWidth: 440 }}>
-            <Box
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 1,
-                mb: 2,
-                fontSize: 11,
-                color: 'secondary.main',
-                fontFamily: 'ui-monospace, monospace',
-                letterSpacing: '0.12em',
-              }}
-            >
-              <Box
-                component="span"
-                sx={{
-                  width: 5,
-                  height: 5,
-                  borderRadius: '50%',
-                  bgcolor: 'secondary.main',
-                  flexShrink: 0,
-                }}
-              />
-              WHAT YOUR TEAM WILL DO
-            </Box>
-            <Typography
-              variant="h2"
-              sx={{ fontSize: 36, lineHeight: 1.1, letterSpacing: '-0.02em', mb: 0 }}
-            >
-              Four agents,
-              <br />
-              one shortlist,
-              <br />
-              <Box component="span" sx={{ color: 'secondary.main' }}>
-                tailored resumes
-              </Box>
-              .
-            </Typography>
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{ mt: 2, maxWidth: 380, lineHeight: 1.55 }}
-            >
-              Fetch listings, score fit, rewrite the resume. Grimoire handles the loop — you approve
-              the output.
-            </Typography>
-          </Box>
-
-          {/* Log panel anchored to bottom */}
-          <Box sx={{ mt: 'auto' }}>
-            <AgentLogPanel compact title="preview · sample run" />
-          </Box>
+        <Box sx={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: 520 }}>
+          <TeamGraph />
         </Box>
       </Box>
     </Box>
