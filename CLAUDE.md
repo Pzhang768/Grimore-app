@@ -68,6 +68,10 @@ Naming: don't repeat parent context in child names. Inside `Hero/_components/`, 
 
 Every sub-component gets its own named folder under `_components/` — never a bare `.tsx` file dropped directly. If a component is used by more than one parent, promote it to `src/components/` at the top level.
 
+**Extraction threshold:** Extract an inline function into `_components/` when it has its own visual concern and is ~40+ LOC — even if it's only used once. Reuse is not the deciding factor; scope boundary is. A parent file with multiple large inline functions has multiple reasons to change.
+
+**Exception — atom groups:** Multiple tiny SVG icons or primitives with no state may share a single file (e.g. `_components/Icons/Icons.tsx`) rather than getting individual folders. Applies only when each unit is <20 LOC and purely presentational.
+
 ---
 
 ## Existing Shared Components
