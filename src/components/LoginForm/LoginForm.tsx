@@ -277,11 +277,11 @@ function VisualSide() {
         <Box sx={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: 520 }}>
           <Typography
             variant="h2"
-            sx={{ fontSize: 28, letterSpacing: '-0.02em', lineHeight: 1.2, mb: 1 }}
+            sx={{ fontSize: 36, lineHeight: 1.1, letterSpacing: '-0.02em', mb: 1 }}
           >
             Your agents are already working.
           </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 3.5 }}>
             A coordinator, a fetcher, an analyser, a tailor — running in parallel while you sleep.
             Log back in and pick up where they left off.
           </Typography>
